@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Auth Pages - Printopia Design Language
+   ========================================================================== */
+
+main.auth {
+  background: var(--bg-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  padding: 32px 16px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(8, 102, 245, 0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 460px;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-modal) !important;
+    border-radius: 16px;
+    position: relative;
+    z-index: 2;
+    padding: 36px 32px !important;
+
+    h1, .ant-typography:is(h1, h2, h3) {
+      color: var(--text-heading) !important;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    p, span, label {
+      color: var(--text-secondary) !important;
+    }
+
+    a {
+      color: #0866F5 !important;
+      font-weight: 600;
+      &:hover {
+        color: #0052CC !important;
+      }
+    }
+
+    button[type="submit"], .ant-btn-primary {
+      background: #0866F5 !important;
+      border-color: #0866F5 !important;
+      color: #FFFFFF !important;
+      font-weight: 600;
+      border-radius: 8px;
+      height: 44px;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(8, 102, 245, 0.35);
+
+      &:hover {
+        background: #0052CC !important;
+        border-color: #0052CC !important;
+        box-shadow: 0 6px 18px rgba(8, 102, 245, 0.45);
+        transform: translateY(-1px);
+      }
+    }
+  }
+}

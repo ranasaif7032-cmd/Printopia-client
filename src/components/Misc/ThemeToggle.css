@@ -1,0 +1,200 @@
+/* ==========================================================================
+   PrintopiaPK - Premium Theme Toggle System
+   ========================================================================== */
+
+/* Base Toggle Button / Pill */
+.printopia-theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 66px;
+  height: 34px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  user-select: none;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.printopia-theme-toggle:focus-visible {
+  box-shadow: 0 0 0 3px rgba(8, 102, 245, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.printopia-theme-toggle:hover {
+  transform: translateY(-1px) scale(1.02);
+  border-color: #0866F5;
+  box-shadow: 0 4px 12px rgba(8, 102, 245, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.printopia-theme-toggle:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Light Mode Track Styling */
+.printopia-theme-toggle.is-light {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f1f5f9 50%, #fef3c7 100%);
+  border-color: rgba(8, 102, 245, 0.25);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(8, 102, 245, 0.12);
+}
+
+/* Dark Mode Track Styling */
+.printopia-theme-toggle.is-dark {
+  background: linear-gradient(135deg, #090d16 0%, #0d1527 50%, #000000 100%);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Track Background Icons */
+.theme-track-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.track-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  transition: all 0.3s ease;
+}
+
+.track-icon.sun {
+  color: #f59e0b;
+  opacity: 0.75;
+}
+
+.track-icon.moon {
+  color: #93c5fd;
+  opacity: 0.75;
+}
+
+.is-dark .track-icon.sun {
+  opacity: 0.3;
+  color: #64748b;
+}
+
+.is-light .track-icon.moon {
+  opacity: 0.3;
+  color: #94a3b8;
+}
+
+/* Sliding Thumb */
+.theme-thumb {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Thumb in Light Mode (Left Side) */
+.is-light .theme-thumb {
+  transform: translateX(0);
+  background: linear-gradient(135deg, #fef08a 0%, #f59e0b 100%);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #78350f;
+}
+
+/* Thumb in Dark Mode (Right Side) */
+.is-dark .theme-thumb {
+  transform: translateX(32px);
+  background: linear-gradient(135deg, #1e293b 0%, #0866F5 100%);
+  box-shadow: 0 0 14px rgba(8, 102, 245, 0.7), 0 2px 6px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+
+/* Inner SVG Icons in Thumb */
+.thumb-svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.is-light .thumb-svg.sun {
+  animation: sunSpin 0.5s ease;
+}
+
+.is-dark .thumb-svg.moon {
+  animation: moonGlow 0.5s ease;
+}
+
+@keyframes sunSpin {
+  0% {
+    transform: rotate(-60deg) scale(0.7);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes moonGlow {
+  0% {
+    transform: rotate(40deg) scale(0.7);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Label next to toggle (if showLabel is enabled) */
+.theme-toggle-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+/* Compact Button Variant */
+.printopia-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 14px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.printopia-theme-btn:hover {
+  border-color: #0866F5;
+  color: #0866F5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(8, 102, 245, 0.15);
+}

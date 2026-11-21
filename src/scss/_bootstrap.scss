@@ -1,0 +1,63 @@
+// Printopia Brand Bootstrap Overrides
+$primary: #0866F5;
+$secondary: #262626;
+$dark: #000000;
+$light: #F8FAFC;
+$link-color: #0866F5;
+$link-hover-color: #0052CC;
+
+@import "bootstrap/scss/bootstrap.scss";
+
+body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+
+/* Responsive containers and utility overrides */
+.container {
+  max-width: 1280px;
+}
+
+.text-primary, .text-blue {
+  color: #0866F5 !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.text-dark {
+  color: var(--text-heading) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.bg-primary {
+  background-color: #0866F5 !important;
+  color: #FFFFFF !important;
+}
+
+.bg-dark {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.bg-light {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+.border {
+  border-color: var(--border-color) !important;
+}
+
+.border-bottom {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.border-top {
+  border-top-color: var(--border-color) !important;
+}

@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Dashboard Components - Printopia Design Language
+   ========================================================================== */
+
+.dashboard {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  .dashboard-topbar {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .dashboard-page-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin: 0;
+  }
+
+  .ant-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-card);
+    border-radius: 12px;
+
+    .ant-statistic-title {
+      color: var(--text-secondary) !important;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .ant-statistic-content {
+      color: #0866F5 !important;
+      font-weight: 800;
+      font-size: 1.65rem;
+    }
+
+    .ant-statistic-content-prefix {
+      color: #0866F5 !important;
+      margin-right: 6px;
+    }
+  }
+
+  .ant-table-wrapper {
+    .ant-table {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .ant-table-thead > tr > th {
+      background: var(--bg-secondary) !important;
+      color: var(--text-heading) !important;
+      border-bottom: 1px solid var(--border-divider);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .ant-table-tbody > tr > td {
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-divider);
+    }
+
+    .ant-table-tbody > tr:hover > td {
+      background: rgba(8, 102, 245, 0.05) !important;
+    }
+  }
+}
+
+.ant-layout-sider {
+  background: var(--bg-card) !important;
+  border-right: 1px solid var(--border-color);
+
+  .ant-layout-sider-children {
+    background: var(--bg-card) !important;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sider-logo-container {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--border-divider);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sider-brand-title {
+  color: var(--text-heading);
+  font-weight: 800;
+  font-size: 1.12rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+
+  span {
+    color: #0866F5;
+  }
+}
+
+.ant-menu-dark,
+.ant-menu {
+  background: var(--bg-card) !important;
+  border-right: none !important;
+
+  .ant-menu-item {
+    color: var(--text-secondary) !important;
+    border-radius: 8px;
+    margin: 4px 8px;
+    width: auto;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    .anticon {
+      color: var(--text-secondary) !important;
+      font-size: 16px;
+      transition: color 0.2s ease;
+    }
+
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+
+    &:hover {
+      background: rgba(8, 102, 245, 0.08) !important;
+      color: #0866F5 !important;
+
+      .anticon {
+        color: #0866F5 !important;
+      }
+    }
+
+    &.ant-menu-item-selected {
+      background: #0866F5 !important;
+      color: #FFFFFF !important;
+      font-weight: 600;
+
+      a, .anticon {
+        color: #FFFFFF !important;
+      }
+    }
+  }
+
+  .ant-menu-item-divider {
+    border-color: var(--border-divider) !important;
+    margin: 8px 12px;
+  }
+}

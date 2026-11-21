@@ -1,0 +1,709 @@
+/* ==========================================================================
+   Printopia PK – Premium Top Offer Bar & Mega Dropdowns
+   Color Palette:
+   - Primary Background: #000000
+   - Secondary Background: #050505
+   - Card Background: #0A0A0A
+   - Primary Blue: #0866F5
+   - Hover Blue: #0052CC
+   - Cyan: #00D9FF
+   - Primary Text: #FFFFFF
+   - Secondary Text: #D1D5DB
+   - Border: #262626
+   ========================================================================== */
+
+.printopia-header-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: #000000;
+  border-bottom: 1px solid #262626;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   Top Offer Bar Base Styles
+   ========================================================================== */
+.top-offer-bar {
+  background: #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid #262626;
+  position: relative;
+  width: 100%;
+  z-index: 1020;
+  user-select: none;
+}
+
+.top-offer-bar-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  gap: 16px;
+}
+
+/* Scrollable Container on Mobile */
+.top-offer-bar-scrollable {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  scroll-behavior: smooth;
+  white-space: nowrap;
+}
+
+.top-offer-bar-scrollable::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* ==========================================================================
+   Offer Item Buttons
+   ========================================================================== */
+.top-offer-item-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #D1D5DB;
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  text-decoration: none;
+}
+
+.top-offer-item-btn:hover {
+  color: #FFFFFF;
+  background: rgba(8, 102, 245, 0.08);
+  border-color: rgba(8, 102, 245, 0.3);
+  transform: translateY(-1px);
+}
+
+.top-offer-item-btn.is-active {
+  color: #FFFFFF;
+  background: rgba(8, 102, 245, 0.16);
+  border-color: #0866F5;
+  box-shadow: 0 0 14px rgba(8, 102, 245, 0.35);
+}
+
+.top-offer-item-btn.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: linear-gradient(90deg, #0866F5, #00D9FF);
+  border-radius: 2px;
+  box-shadow: 0 0 8px #00D9FF;
+}
+
+.offer-icon {
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.4));
+  transition: transform 0.2s ease;
+}
+
+.top-offer-item-btn:hover .offer-icon {
+  transform: scale(1.15);
+}
+
+.offer-title {
+  font-weight: 700;
+  color: inherit;
+  letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   Badges: HOT, POPULAR, NEW, SALE, TRENDING
+   ========================================================================== */
+.offer-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.2s ease;
+}
+
+/* Badge Color Variants */
+.offer-badge-orange,
+.offer-badge-hot {
+  background: linear-gradient(135deg, #EA580C, #F97316);
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(234, 88, 12, 0.45);
+}
+
+.offer-badge-blue,
+.offer-badge-popular {
+  background: linear-gradient(135deg, #0866F5, #2563EB);
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(8, 102, 245, 0.5);
+}
+
+.offer-badge-cyan {
+  background: linear-gradient(135deg, #00D9FF, #0284C7);
+  color: #000000;
+  font-weight: 900;
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.6);
+}
+
+.offer-badge-green,
+.offer-badge-new {
+  background: linear-gradient(135deg, #059669, #10B981);
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+}
+
+.offer-badge-purple,
+.offer-badge-trending {
+  background: linear-gradient(135deg, #7C3AED, #9333EA);
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(147, 51, 234, 0.45);
+}
+
+.offer-badge-sale {
+  background: linear-gradient(135deg, #DC2626, #EF4444);
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+  animation: badgePulse 2s infinite ease-in-out;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.92; }
+}
+
+/* Dropdown Arrow */
+.offer-dropdown-arrow {
+  font-size: 0.65rem;
+  color: #9CA3AF;
+  transition: transform 0.25s ease, color 0.2s ease;
+  margin-left: 2px;
+}
+
+.top-offer-item-btn:hover .offer-dropdown-arrow,
+.top-offer-item-btn.is-active .offer-dropdown-arrow {
+  color: #00D9FF;
+}
+
+.top-offer-item-btn.is-active .offer-dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Top Offer Bar Right Controls
+   ========================================================================== */
+.top-offer-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.offer-hotline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(8, 102, 245, 0.1);
+  border: 1px solid rgba(8, 102, 245, 0.3);
+  color: #00D9FF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.offer-hotline-chip:hover {
+  background: #0866F5;
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(8, 102, 245, 0.5);
+}
+
+.offer-admin-btn {
+  background: #0A0A0A;
+  border: 1px solid #262626;
+  color: #00D9FF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.offer-admin-btn:hover {
+  background: rgba(0, 217, 255, 0.12);
+  border-color: #00D9FF;
+  color: #FFFFFF;
+}
+
+/* When the bar is disabled, admin stub */
+.top-offer-bar-admin-stub {
+  background: #0A0A0A;
+  border-bottom: 1px dashed #262626;
+  padding: 6px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   Dropdown Backdrop Overlay
+   ========================================================================== */
+.offer-dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  z-index: 1010;
+  animation: offerBackdropFadeIn 0.22s ease forwards;
+}
+
+@keyframes offerBackdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   Dropdown Mega Panel (Events, Boxes, Deals, Collections)
+   ========================================================================== */
+.offer-dropdown-panel-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1030;
+  pointer-events: none;
+}
+
+.offer-dropdown-panel {
+  pointer-events: auto;
+  max-width: 1280px;
+  margin: 8px auto 0;
+  background: #0A0A0A;
+  border: 1px solid #262626;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 24px rgba(8, 102, 245, 0.18);
+  padding: 24px;
+  animation: offerPanelSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-height: 82vh;
+  overflow-y: auto;
+}
+
+@keyframes offerPanelSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Dropdown Header */
+.offer-dropdown-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid #262626;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.offer-dropdown-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.offer-dropdown-header-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(8, 102, 245, 0.15);
+  border: 1px solid rgba(8, 102, 245, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  color: #00D9FF;
+  flex-shrink: 0;
+}
+
+.offer-dropdown-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.015em;
+}
+
+.offer-dropdown-subtitle {
+  font-size: 0.86rem;
+  color: #D1D5DB;
+  margin: 0;
+}
+
+.offer-dropdown-close-btn {
+  background: #050505;
+  border: 1px solid #262626;
+  color: #D1D5DB;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.offer-dropdown-close-btn:hover {
+  background: rgba(8, 102, 245, 0.2);
+  color: #00D9FF;
+  border-color: #00D9FF;
+}
+
+/* ==========================================================================
+   Events Dropdown Grid & Cards
+   ========================================================================== */
+.events-tabs-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.events-tab-pill {
+  background: #050505;
+  border: 1px solid #262626;
+  color: #D1D5DB;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.events-tab-pill:hover,
+.events-tab-pill.active {
+  background: #0866F5;
+  border-color: #0866F5;
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(8, 102, 245, 0.4);
+}
+
+.dropdown-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.dropdown-card-item {
+  background: #050505;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-card-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #0866F5, #00D9FF);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.dropdown-card-item:hover {
+  background: #0e0e0e;
+  border-color: #0866F5;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(8, 102, 245, 0.2);
+}
+
+.dropdown-card-item:hover::before {
+  opacity: 1;
+}
+
+.dropdown-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.dropdown-card-icon {
+  font-size: 1.4rem;
+}
+
+.dropdown-card-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(8, 102, 245, 0.15);
+  color: #00D9FF;
+  border: 1px solid rgba(0, 217, 255, 0.3);
+}
+
+.dropdown-card-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 6px 0;
+  transition: color 0.2s ease;
+}
+
+.dropdown-card-item:hover .dropdown-card-title {
+  color: #00D9FF;
+}
+
+.dropdown-card-desc {
+  font-size: 0.82rem;
+  color: #D1D5DB;
+  line-height: 1.45;
+  margin: 0 0 14px 0;
+}
+
+.dropdown-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #0866F5;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-card-item:hover .dropdown-card-footer {
+  color: #00D9FF;
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Boxes Custom Features Strip
+   ========================================================================== */
+.boxes-features-strip-dark {
+  margin-top: 22px;
+  padding: 16px 20px;
+  background: #050505;
+  border: 1px solid #262626;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.boxes-features-list {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.box-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #D1D5DB;
+  font-weight: 600;
+}
+
+.box-feature-pill span {
+  color: #00D9FF;
+  font-weight: 700;
+}
+
+.custom-quote-btn {
+  background: linear-gradient(135deg, #0866F5, #0052CC);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(8, 102, 245, 0.4);
+}
+
+.custom-quote-btn:hover {
+  background: #0052CC;
+  box-shadow: 0 4px 16px rgba(8, 102, 245, 0.6);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Deals & Special Offers Grid
+   ========================================================================== */
+.deals-grid-dark {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.deal-card-dark {
+  background: #050505;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  position: relative;
+}
+
+.deal-card-dark:hover {
+  border-color: #EA580C;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(234, 88, 12, 0.25);
+}
+
+.deal-card-tag {
+  display: inline-block;
+  background: #EA580C;
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  box-shadow: 0 0 8px rgba(234, 88, 12, 0.4);
+}
+
+.deal-card-title {
+  color: #FFFFFF;
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.deal-card-desc {
+  color: #D1D5DB;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  margin: 0 0 14px 0;
+}
+
+.deal-card-claim {
+  color: #EA580C;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 992px) {
+  .top-offer-bar-container {
+    padding: 0 12px;
+    height: 44px;
+  }
+
+  .top-offer-item-btn {
+    padding: 5px 10px;
+    font-size: 0.82rem;
+  }
+
+  .offer-hotline-chip {
+    display: none;
+  }
+
+  .offer-dropdown-panel {
+    margin: 4px 12px 0;
+    padding: 18px;
+  }
+
+  .dropdown-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .top-offer-bar-container {
+    padding: 0 8px;
+    height: 42px;
+  }
+
+  .top-offer-item-btn {
+    padding: 4px 8px;
+    font-size: 0.78rem;
+    gap: 6px;
+  }
+
+  .offer-badge {
+    font-size: 0.6rem;
+    padding: 1px 5px;
+  }
+
+  .offer-dropdown-panel {
+    margin: 4px 8px 0;
+    padding: 14px;
+    max-height: 80vh;
+  }
+
+  .offer-dropdown-title {
+    font-size: 1.05rem;
+  }
+
+  .boxes-features-strip-dark {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
