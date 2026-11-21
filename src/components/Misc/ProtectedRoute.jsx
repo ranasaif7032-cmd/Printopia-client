@@ -5,8 +5,8 @@ import ScreenLoader from './ScreenLoader'
 const ProtectedRoute = ({ element, adminOnly }) => {
   const { isAuth, userRole, isAppLoading } = useAuth()
   if (isAppLoading) return <ScreenLoader />
-  // if (!isAuth) return <Navigate to="/auth/login" />
-  // if (adminOnly && userRole !== 'admin') return <Navigate to="/" />
+  if (!isAuth) return <Navigate to="/auth/login" replace />
+  if (adminOnly && userRole !== 'admin') return <Navigate to="/" replace />
   return element
 }
 

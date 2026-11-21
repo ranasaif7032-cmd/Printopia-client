@@ -17,23 +17,41 @@ const headers = (extra = {}) => {
   return h
 }
 
-const parseResponse = async (res) => {
-  if (res.status === 401) {
-    handleUnauthorized()
-    throw new Error('Session expired. Please login again.')
+const handleResponse = async (res, path) => {
+  let data = null
+  try {
+    const text = await res.text()
+    if (text) {
+      try {
+        data = JSON.parse(text)
+      } catch {
+        data = { message: text }
+      }
+    }
+  } catch {
+    data = null
   }
-  const text = await res.text()
-  try { return JSON.parse(text) } catch { return text }
+
+  if (!res.ok) {
+    const isAuthRoute = path.startsWith('/auth/login') || path.startsWith('/auth/register')
+    if (res.status === 401) {
+      if (!isAuthRoute) {
+        handleUnauthorized()
+        throw new Error(data?.error || data?.message || 'Session expired. Please login again.')
+      }
+      throw new Error(data?.error || data?.message || 'Invalid email or password.')
+    }
+    const message = data?.error || data?.message || `Request failed (${res.status})`
+    throw new Error(message)
+  }
+
+  return data
 }
 
 export const api = {
   get: async (path) => {
     const res = await fetch(`${API_BASE}${path}`, { headers: headers() })
-    if (!res.ok) {
-      const err = await parseResponse(res).catch(() => ({ error: 'Request failed' }))
-      throw new Error(err?.error || 'Request failed')
-    }
-    return parseResponse(res)
+    return handleResponse(res, path)
   },
 
   post: async (path, body, isFormData = false) => {
@@ -45,11 +63,7 @@ export const api = {
       opts.body = JSON.stringify(body)
     }
     const res = await fetch(`${API_BASE}${path}`, opts)
-    if (!res.ok) {
-      const err = await parseResponse(res).catch(() => ({ error: 'Request failed' }))
-      throw new Error(err?.error || 'Request failed')
-    }
-    return parseResponse(res)
+    return handleResponse(res, path)
   },
 
   put: async (path, body, isFormData = false) => {
@@ -61,11 +75,7 @@ export const api = {
       opts.body = JSON.stringify(body)
     }
     const res = await fetch(`${API_BASE}${path}`, opts)
-    if (!res.ok) {
-      const err = await parseResponse(res).catch(() => ({ error: 'Request failed' }))
-      throw new Error(err?.error || 'Request failed')
-    }
-    return parseResponse(res)
+    return handleResponse(res, path)
   },
 
   delete: async (path, body = undefined) => {
@@ -75,10 +85,6 @@ export const api = {
       opts.body = JSON.stringify(body)
     }
     const res = await fetch(`${API_BASE}${path}`, opts)
-    if (!res.ok) {
-      const err = await parseResponse(res).catch(() => ({ error: 'Request failed' }))
-      throw new Error(err?.error || 'Request failed')
-    }
-    return parseResponse(res)
+    return handleResponse(res, path)
   },
 }

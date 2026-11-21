@@ -21,12 +21,13 @@ const Login = () => {
 
   const handleLoginSubmit = async () => {
     const { email, password } = state
-    if (!email) { window.toastify('Please enter your email', 'error'); return }
+    const cleanEmail = email?.trim().toLowerCase()
+    if (!cleanEmail) { window.toastify('Please enter your email', 'error'); return }
     if (!password) { window.toastify('Please enter your password', 'error'); return }
 
     setIsProcessing(true)
     try {
-      await handleLogin(email, password)
+      await handleLogin(cleanEmail, password)
       window.toastify('Login successful', 'success')
       navigate('/')
     } catch (err) {
