@@ -1,4 +1,10 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const candidateBases = [
+  import.meta.env.VITE_API_URL,
+  'http://localhost:5000/api',
+  'http://localhost:8000/api',
+].filter(Boolean)
+
+let activeApiBase = candidateBases[0]
 
 const getToken = () => localStorage.getItem('token')
 
@@ -15,6 +21,25 @@ const headers = (extra = {}) => {
   const token = getToken()
   if (token) h['Authorization'] = `Bearer ${token}`
   return h
+}
+
+const fetchWithFallback = async (path, opts) => {
+  try {
+    const res = await fetch(`${activeApiBase}${path}`, opts)
+    return res
+  } catch {
+    for (const altBase of candidateBases) {
+      if (altBase === activeApiBase) continue
+      try {
+        const res = await fetch(`${altBase}${path}`, opts)
+        activeApiBase = altBase
+        return res
+      } catch {
+        // continue trying
+      }
+    }
+    throw new Error('Cannot connect to the server (connection refused). Please make sure the backend server is running.')
+  }
 }
 
 const handleResponse = async (res, path) => {
@@ -50,7 +75,7 @@ const handleResponse = async (res, path) => {
 
 export const api = {
   get: async (path) => {
-    const res = await fetch(`${API_BASE}${path}`, { headers: headers() })
+    const res = await fetchWithFallback(path, { headers: headers() })
     return handleResponse(res, path)
   },
 
@@ -62,7 +87,7 @@ export const api = {
       opts.headers['Content-Type'] = 'application/json'
       opts.body = JSON.stringify(body)
     }
-    const res = await fetch(`${API_BASE}${path}`, opts)
+    const res = await fetchWithFallback(path, opts)
     return handleResponse(res, path)
   },
 
@@ -74,7 +99,7 @@ export const api = {
       opts.headers['Content-Type'] = 'application/json'
       opts.body = JSON.stringify(body)
     }
-    const res = await fetch(`${API_BASE}${path}`, opts)
+    const res = await fetchWithFallback(path, opts)
     return handleResponse(res, path)
   },
 
@@ -84,7 +109,7 @@ export const api = {
       opts.headers['Content-Type'] = 'application/json'
       opts.body = JSON.stringify(body)
     }
-    const res = await fetch(`${API_BASE}${path}`, opts)
+    const res = await fetchWithFallback(path, opts)
     return handleResponse(res, path)
   },
 }

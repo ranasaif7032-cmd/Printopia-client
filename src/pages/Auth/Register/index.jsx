@@ -34,22 +34,17 @@ const Register = () => {
 
   const handleRegisterSubmit = async () => {
     let { fullName, email, password, confirmPassword } = state
-    fullName = fullName.trim()
+    fullName = fullName ? fullName.trim() : ''
+    const cleanEmail = email ? email.trim().toLowerCase() : ''
     if (fullName.length < 3) { window.toastify('Full name must be at least 3 characters', 'error'); return }
-    if (!window.isEmailVaild(email)) { window.toastify('Please enter a valid email', 'error'); return }
+    if (!cleanEmail || !window.isEmailValid(cleanEmail)) { window.toastify('Please enter a valid email address', 'error'); return }
     if (password.length < 6) { window.toastify('Password must be at least 6 characters', 'error'); return }
     if (password !== confirmPassword) { window.toastify('Passwords do not match', 'error'); return }
 
     setIsProcessing(true)
     try {
-      const formData = new FormData()
-      formData.append('fullName', fullName)
-      formData.append('email', email)
-      formData.append('password', password)
-      if (avatarFile) formData.append('avatar', avatarFile)
-
-      await handleRegister(fullName, email, password, avatarFile)
-      window.toastify('Registration successful', 'success')
+      await handleRegister(fullName, cleanEmail, password, avatarFile)
+      window.toastify('Registration successful! Welcome to Printopia.', 'success')
       navigate('/')
     } catch (err) {
       window.toastify(err.message || 'Registration failed. Please try again.', 'error')
